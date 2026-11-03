@@ -14,7 +14,7 @@ import {
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const required = [
-  'index.html','styles.css','app.js','backend-adapter.js',
+  'index.html','styles.css','app.js','backend-adapter.js','.openai/hosting.json',
   'assets/hero-garden.webp','assets/floral-divider.webp','assets/floral-corners.webp','assets/calendar-hall.webp',
   'assets/fonts/cormorant-regular.woff2','assets/fonts/cormorant-italic.woff2','assets/fonts/manrope-regular.woff2'
 ];
