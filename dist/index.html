@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#bcd7e9">
+  <meta name="description" content="Свадебное приглашение">
+  <meta name="invitation-default-id" content="1">
+  <title>Свадебное приглашение</title>
+  <link rel="preload" href="assets/fonts/cormorant-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/hero-garden.webp" as="image" type="image/webp" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=1">
+  <script type="module" src="app.js?v=1"></script>
+</head>
+<body>
+  <div class="sky-noise" aria-hidden="true"></div>
+
+  <div class="status-screen" id="statusScreen" role="status" aria-live="polite">
+    <div class="status-screen__cloud">
+      <span class="status-screen__ornament" aria-hidden="true">✦</span>
+      <p id="statusTitle">Загружаем приглашение…</p>
+      <div class="status-screen__loader" id="statusLoader" aria-hidden="true"><i></i><i></i><i></i></div>
+      <button class="status-screen__retry" id="retryButton" type="button" hidden>Попробовать снова</button>
+    </div>
+  </div>
+
+  <main id="site" hidden>
+    <section class="hero" id="top" aria-labelledby="heroNames">
+      <div class="hero__mist hero__mist--one" aria-hidden="true"></div>
+      <div class="hero__mist hero__mist--two" aria-hidden="true"></div>
+      <div class="hero__content reveal">
+        <p class="eyebrow" data-ui="invitationLabel">Свадебное приглашение</p>
+        <div class="ornate-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <h1 class="hero__names" id="heroNames">
+          <span id="groomName"></span>
+          <em>&amp;</em>
+          <span id="brideName"></span>
+        </h1>
+        <div class="hero__date" id="heroDate"></div>
+        <a class="scroll-cue" href="#invitation" aria-label="Перейти к приглашению">
+          <span data-ui="scroll">листайте вниз</span>
+          <i aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="cloud-edge cloud-edge--bottom" aria-hidden="true"></div>
+    </section>
+
+    <section class="invitation section" id="invitation">
+      <div class="section__inner invitation__inner reveal">
+        <div class="mini-flourish" aria-hidden="true"><span>✦</span></div>
+        <p class="eyebrow" data-ui="dearLabel">Для самых близких</p>
+        <h2 class="display-title" id="invitationTitle"></h2>
+        <p class="body-copy" id="invitationText"></p>
+        <div class="signature" id="invitationSignature"></div>
+      </div>
+    </section>
+
+    <section class="wish section" id="wishBlock" hidden>
+      <div class="cloud-ribbon" aria-hidden="true"></div>
+      <div class="section__inner wish__card reveal">
+        <span class="wish__pearl wish__pearl--one" aria-hidden="true"></span>
+        <span class="wish__pearl wish__pearl--two" aria-hidden="true"></span>
+        <p class="eyebrow" data-ui="wishLabel">От всего сердца</p>
+        <h2 class="display-title" id="wishTitle"></h2>
+        <p class="body-copy" id="wishText"></p>
+      </div>
+    </section>
+
+    <section class="date-section section" id="dateSection">
+      <div class="section__inner date-layout">
+        <div class="date-copy reveal">
+          <p class="eyebrow" data-ui="dateLabel">Сохраните эту дату</p>
+          <h2 class="display-title"><span id="dateDay"></span> <em id="dateMonth"></em></h2>
+          <p class="date-copy__meta" id="dateMeta"></p>
+        </div>
+        <div class="calendar-card reveal" aria-label="Календарь">
+          <div class="calendar-card__head">
+            <span id="calendarMonth"></span>
+            <span id="calendarYear"></span>
+          </div>
+          <div class="calendar-week" id="calendarWeek"></div>
+          <div class="calendar-days" id="calendarDays"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="program section" id="programSection">
+      <div class="program__glow" aria-hidden="true"></div>
+      <div class="section__inner">
+        <header class="section-heading reveal">
+          <p class="eyebrow" data-ui="programLabel">В этот особенный день</p>
+          <h2 class="display-title" data-ui="programTitle">Программа дня</h2>
+          <div class="mini-flourish" aria-hidden="true"><span>✦</span></div>
+        </header>
+        <div class="timeline" id="timeline"></div>
+      </div>
+      <img class="program__florals" src="assets/floral-corners.webp" alt="" loading="lazy" decoding="async">
+    </section>
+
+    <section class="venue section" id="venueSection">
+      <div class="cloud-edge cloud-edge--top" aria-hidden="true"></div>
+      <div class="section__inner venue__inner">
+        <div class="venue__illustration reveal">
+          <img src="assets/hero-garden.webp" alt="" loading="lazy" decoding="async">
+          <span class="venue__arch" aria-hidden="true"></span>
+        </div>
+        <div class="venue__copy reveal">
+          <p class="eyebrow" id="venueType"></p>
+          <h2 class="display-title" id="venueName"></h2>
+          <p class="venue__address" id="venueAddress"></p>
+          <div class="venue__actions" id="venueActions" hidden>
+            <a class="button button--primary" id="googleMap" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.1 7-13a7 7 0 1 0-14 0c0 6.9 7 13 7 13Zm0-9.7A3.3 3.3 0 1 1 12 5.7a3.3 3.3 0 0 1 0 6.6Z"/></svg>
+              <span>Google Maps</span>
+            </a>
+            <a class="button button--ghost" id="twoGisMap" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 5 5-2 8 3 5-2v15l-5 2-8-3-5 2V5Zm5 0v11m8-8v11"/></svg>
+              <span>2ГИС</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rsvp section" id="rsvpSection" hidden>
+      <div class="section__inner rsvp__inner reveal">
+        <p class="eyebrow" data-ui="answerLabel">Ваш ответ</p>
+        <h2 class="display-title" data-ui="rsvpTitle">Будете ли вы с нами?</h2>
+        <p class="rsvp__lead" data-ui="rsvpLead">Пожалуйста, подтвердите участие — нам важно подготовить всё с заботой.</p>
+
+        <form class="rsvp-form" id="rsvpForm" novalidate>
+          <label class="field">
+            <span data-ui="nameLabel">Ваше имя</span>
+            <input id="guestName" name="name" type="text" autocomplete="name" maxlength="120" required>
+          </label>
+
+          <fieldset class="attendance">
+            <legend data-ui="attendanceLabel">Вы сможете прийти?</legend>
+            <label><input type="radio" name="attendance" value="yes" checked><span data-ui="attendanceYes">Да, с радостью</span></label>
+            <label><input type="radio" name="attendance" value="no"><span data-ui="attendanceNo">К сожалению, не смогу</span></label>
+          </fieldset>
+
+          <label class="field" id="guestCountField">
+            <span data-ui="guestCount">Количество гостей</span>
+            <input id="guestCount" name="guests_count" type="number" inputmode="numeric" min="1" value="1" required>
+          </label>
+
+          <label class="field" id="guestWishField" hidden>
+            <span data-ui="guestWish">Ваше пожелание</span>
+            <textarea id="guestWish" name="wish" rows="4" maxlength="600"></textarea>
+          </label>
+
+          <button class="button button--submit" id="rsvpSubmit" type="submit" data-ui="submit">Подтвердить участие</button>
+          <p class="form-status" id="formStatus" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__clouds" aria-hidden="true"></div>
+      <div class="footer__inner reveal">
+        <p class="footer__line" data-ui="waiting">С нетерпением ждём встречи!</p>
+        <p class="footer__names" id="footerNames"></p>
+        <div class="mini-flourish mini-flourish--light" aria-hidden="true"><span>✦</span></div>
+      </div>
+    </footer>
+  </main>
+
+  <nav class="language-switch" id="languageSwitch" aria-label="Выбор языка" hidden></nav>
+</body>
+</html>
