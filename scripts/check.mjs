@@ -89,12 +89,13 @@ assert.equal(submitted.raw.guests.length,2);
 const html=fs.readFileSync(path.join(dist,'index.html'),'utf8');
 const css=fs.readFileSync(path.join(dist,'styles.css'),'utf8');
 const app=fs.readFileSync(path.join(dist,'app.js'),'utf8');
-for(const marker of ['statusScreen','languageSwitch','rsvpForm','googleMap','twoGisMap','calendarDays'])assert(html.includes(marker),`Missing ${marker}`);
+for(const marker of ['statusScreen','languageSwitch','rsvpForm','googleMap','twoGisMap','calendarDays','countdownDays','countdownSeconds','data-ui="countdownTitle"'])assert(html.includes(marker),`Missing ${marker}`);
 for(const marker of ['@media (max-width:360px)','overflow-x:clip','max-width:100%','prefers-reduced-motion'])assert(css.includes(marker),`Missing CSS ${marker}`);
-for(const marker of ['appendGuestToInvitation','IntersectionObserver','localStorage','renderTimeline','renderLanguageSwitch','queueBackgroundParallax','window.scrollY/travel'])assert(app.includes(marker),`Missing behavior ${marker}`);
+for(const marker of ['appendGuestToInvitation','IntersectionObserver','localStorage','renderTimeline','renderLanguageSwitch','queueBackgroundParallax','window.scrollY/travel','startCountdown','setInterval(updateCountdown,1000)'])assert(app.includes(marker),`Missing behavior ${marker}`);
 for(const removed of ['cloud-edge','cloud-ribbon','program__florals','venue__illustration','footer__clouds'])assert(!html.includes(removed),`Removed decoration still present: ${removed}`);
-assert(css.includes('background-position')&&css.includes('color:var(--ink);background:linear-gradient(180deg,rgba(235,247,252,.4)'), 'Missing parallax background or light footer');
+assert(css.includes('background-position')&&css.includes("background:url('assets/hero-garden.webp')")&&css.includes('mask-image:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.08) 5%,#000 24%'), 'Missing parallax background or blended countdown footer');
+for(const section of ['.hero{','.invitation{','.wish{','.date-section{','.program{','.venue{','.rsvp{'])assert(css.includes(`${section}`)&&css.slice(css.indexOf(section),css.indexOf(section)+260).includes('background:transparent'),`Section is not seam-free: ${section}`);
 assert(!`${html}${css}${app}`.toLowerCase().includes('swan'),'Swan artwork or copy must not be present');
 assert(!`${html}${css}${app}`.includes('лебед'),'Лебеди должны отсутствовать');
 
-console.log('Passed: dynamic schema, languages, maps, RSVP, proportional background parallax, simplified sections, mobile safeguards, and no swans.');
+console.log('Passed: dynamic schema, languages, maps, RSVP, seamless parallax sections, localized wedding countdown, mobile safeguards, and no swans.');

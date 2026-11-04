@@ -10,13 +10,13 @@ import {
 
 const UI = {
   ru: {
-    invitationLabel:'Свадебное приглашение',scroll:'листайте вниз',dearLabel:'Для самых близких',wishLabel:'От всего сердца',dateLabel:'Сохраните эту дату',programLabel:'В этот особенный день',programTitle:'Программа дня',answerLabel:'Ваш ответ',rsvpTitle:'Будете ли вы с нами?',rsvpLead:'Пожалуйста, подтвердите участие — нам важно подготовить всё с заботой.',nameLabel:'Ваше имя',namePlaceholder:'Как к вам обращаться?',attendanceLabel:'Вы сможете прийти?',attendanceYes:'Да, с радостью',attendanceNo:'К сожалению, не смогу',guestCount:'Количество гостей',guestWish:'Ваше пожелание',wishPlaceholder:'Несколько тёплых слов…',submit:'Подтвердить участие',submitting:'Отправляем…',success:'Спасибо! Ваш ответ сохранён.',formError:'Пожалуйста, укажите ваше имя.',sendError:'Не удалось сохранить ответ. Попробуйте ещё раз.',waiting:'С нетерпением ждём встречи!',loading:'Загружаем приглашение…',notFound:'Приглашение не найдено',loadError:'Не удалось загрузить приглашение',retry:'Попробовать снова',calendar:'Календарь',signature:'С любовью',meta:'Свадебное приглашение'
+    invitationLabel:'Свадебное приглашение',scroll:'листайте вниз',dearLabel:'Для самых близких',wishLabel:'От всего сердца',dateLabel:'Сохраните эту дату',programLabel:'В этот особенный день',programTitle:'Программа дня',answerLabel:'Ваш ответ',rsvpTitle:'Будете ли вы с нами?',rsvpLead:'Пожалуйста, подтвердите участие — нам важно подготовить всё с заботой.',nameLabel:'Ваше имя',namePlaceholder:'Как к вам обращаться?',attendanceLabel:'Вы сможете прийти?',attendanceYes:'Да, с радостью',attendanceNo:'К сожалению, не смогу',guestCount:'Количество гостей',guestWish:'Ваше пожелание',wishPlaceholder:'Несколько тёплых слов…',submit:'Подтвердить участие',submitting:'Отправляем…',success:'Спасибо! Ваш ответ сохранён.',formError:'Пожалуйста, укажите ваше имя.',sendError:'Не удалось сохранить ответ. Попробуйте ещё раз.',countdownTitle:'До нашей свадьбы осталось',countdownDays:'дней',countdownHours:'часов',countdownMinutes:'минут',countdownSeconds:'секунд',withLove:'С любовью,',loading:'Загружаем приглашение…',notFound:'Приглашение не найдено',loadError:'Не удалось загрузить приглашение',retry:'Попробовать снова',calendar:'Календарь',signature:'С любовью',meta:'Свадебное приглашение'
   },
   ky: {
-    invitationLabel:'Үйлөнүү тоюна чакыруу',scroll:'ылдый сүрүңүз',dearLabel:'Эң жакындарыбыз үчүн',wishLabel:'Чын жүрөктөн',dateLabel:'Бул күндү белгилеп коюңуз',programLabel:'Бул өзгөчө күнү',programTitle:'Күндүн программасы',answerLabel:'Сиздин жообуңуз',rsvpTitle:'Биз менен болосузбу?',rsvpLead:'Катышарыңызды ырастап коюңуз — баарын камкордук менен даярдоо биз үчүн маанилүү.',nameLabel:'Сиздин атыңыз',namePlaceholder:'Сизге кантип кайрылалы?',attendanceLabel:'Тойго келе аласызбы?',attendanceYes:'Ооба, кубануу менен',attendanceNo:'Тилекке каршы, келе албайм',guestCount:'Коноктордун саны',guestWish:'Сиздин каалооңуз',wishPlaceholder:'Бир нече жылуу сөз…',submit:'Катышууну ырастоо',submitting:'Жөнөтүлүүдө…',success:'Рахмат! Жообуңуз сакталды.',formError:'Атыңызды жазыңыз.',sendError:'Жооп сакталган жок. Кайра аракет кылыңыз.',waiting:'Жолугушууну чыдамсыздык менен күтөбүз!',loading:'Чакыруу жүктөлүүдө…',notFound:'Чакыруу табылган жок',loadError:'Чакыруу жүктөлгөн жок',retry:'Кайра аракет кылуу',calendar:'Жылнаама',signature:'Сүйүү менен',meta:'Үйлөнүү тоюна чакыруу'
+    invitationLabel:'Үйлөнүү тоюна чакыруу',scroll:'ылдый сүрүңүз',dearLabel:'Эң жакындарыбыз үчүн',wishLabel:'Чын жүрөктөн',dateLabel:'Бул күндү белгилеп коюңуз',programLabel:'Бул өзгөчө күнү',programTitle:'Күндүн программасы',answerLabel:'Сиздин жообуңуз',rsvpTitle:'Биз менен болосузбу?',rsvpLead:'Катышарыңызды ырастап коюңуз — баарын камкордук менен даярдоо биз үчүн маанилүү.',nameLabel:'Сиздин атыңыз',namePlaceholder:'Сизге кантип кайрылалы?',attendanceLabel:'Тойго келе аласызбы?',attendanceYes:'Ооба, кубануу менен',attendanceNo:'Тилекке каршы, келе албайм',guestCount:'Коноктордун саны',guestWish:'Сиздин каалооңуз',wishPlaceholder:'Бир нече жылуу сөз…',submit:'Катышууну ырастоо',submitting:'Жөнөтүлүүдө…',success:'Рахмат! Жообуңуз сакталды.',formError:'Атыңызды жазыңыз.',sendError:'Жооп сакталган жок. Кайра аракет кылыңыз.',countdownTitle:'Үйлөнүү тоюбузга калды',countdownDays:'күн',countdownHours:'саат',countdownMinutes:'мүнөт',countdownSeconds:'секунд',withLove:'Сүйүү менен,',loading:'Чакыруу жүктөлүүдө…',notFound:'Чакыруу табылган жок',loadError:'Чакыруу жүктөлгөн жок',retry:'Кайра аракет кылуу',calendar:'Жылнаама',signature:'Сүйүү менен',meta:'Үйлөнүү тоюна чакыруу'
   },
   kk: {
-    invitationLabel:'Үйлену тойына шақыру',scroll:'төмен қарай сырғытыңыз',dearLabel:'Ең жақындарымызға',wishLabel:'Шын жүректен',dateLabel:'Осы күнді сақтаңыз',programLabel:'Осы ерекше күні',programTitle:'Күн бағдарламасы',answerLabel:'Сіздің жауабыңыз',rsvpTitle:'Бізбен бірге боласыз ба?',rsvpLead:'Қатысатыныңызды растаңыз — бәрін қамқорлықпен дайындау біз үшін маңызды.',nameLabel:'Сіздің атыңыз',namePlaceholder:'Сізге қалай жүгінеміз?',attendanceLabel:'Тойға келе аласыз ба?',attendanceYes:'Иә, қуана келемін',attendanceNo:'Өкінішке қарай, келе алмаймын',guestCount:'Қонақтар саны',guestWish:'Сіздің тілегіңіз',wishPlaceholder:'Бірнеше жылы сөз…',submit:'Қатысуды растау',submitting:'Жіберілуде…',success:'Рақмет! Жауабыңыз сақталды.',formError:'Атыңызды жазыңыз.',sendError:'Жауап сақталмады. Қайталап көріңіз.',waiting:'Кездесуді асыға күтеміз!',loading:'Шақыру жүктелуде…',notFound:'Шақыру табылмады',loadError:'Шақыру жүктелмеді',retry:'Қайталап көру',calendar:'Күнтізбе',signature:'Сүйіспеншілікпен',meta:'Үйлену тойына шақыру'
+    invitationLabel:'Үйлену тойына шақыру',scroll:'төмен қарай сырғытыңыз',dearLabel:'Ең жақындарымызға',wishLabel:'Шын жүректен',dateLabel:'Осы күнді сақтаңыз',programLabel:'Осы ерекше күні',programTitle:'Күн бағдарламасы',answerLabel:'Сіздің жауабыңыз',rsvpTitle:'Бізбен бірге боласыз ба?',rsvpLead:'Қатысатыныңызды растаңыз — бәрін қамқорлықпен дайындау біз үшін маңызды.',nameLabel:'Сіздің атыңыз',namePlaceholder:'Сізге қалай жүгінеміз?',attendanceLabel:'Тойға келе аласыз ба?',attendanceYes:'Иә, қуана келемін',attendanceNo:'Өкінішке қарай, келе алмаймын',guestCount:'Қонақтар саны',guestWish:'Сіздің тілегіңіз',wishPlaceholder:'Бірнеше жылы сөз…',submit:'Қатысуды растау',submitting:'Жіберілуде…',success:'Рақмет! Жауабыңыз сақталды.',formError:'Атыңызды жазыңыз.',sendError:'Жауап сақталмады. Қайталап көріңіз.',countdownTitle:'Тойымызға дейін қалды',countdownDays:'күн',countdownHours:'сағат',countdownMinutes:'минут',countdownSeconds:'секунд',withLove:'Сүйіспеншілікпен,',loading:'Шақыру жүктелуде…',notFound:'Шақыру табылмады',loadError:'Шақыру жүктелмеді',retry:'Қайталап көру',calendar:'Күнтізбе',signature:'Сүйіспеншілікпен',meta:'Үйлену тойына шақыру'
   }
 };
 
@@ -32,13 +32,14 @@ const elements = {
   groom:$('#groomName'),bride:$('#brideName'),heroDate:$('#heroDate'),invitationTitle:$('#invitationTitle'),invitationText:$('#invitationText'),signature:$('#invitationSignature'),
   wishBlock:$('#wishBlock'),wishTitle:$('#wishTitle'),wishText:$('#wishText'),dateSection:$('#dateSection'),dateDay:$('#dateDay'),dateMonth:$('#dateMonth'),dateMeta:$('#dateMeta'),calendarMonth:$('#calendarMonth'),calendarYear:$('#calendarYear'),calendarWeek:$('#calendarWeek'),calendarDays:$('#calendarDays'),
   program:$('#programSection'),timeline:$('#timeline'),venue:$('#venueSection'),venueType:$('#venueType'),venueName:$('#venueName'),venueAddress:$('#venueAddress'),venueActions:$('#venueActions'),google:$('#googleMap'),twoGis:$('#twoGisMap'),
-  rsvp:$('#rsvpSection'),form:$('#rsvpForm'),submit:$('#rsvpSubmit'),formStatus:$('#formStatus'),name:$('#guestName'),count:$('#guestCount'),countField:$('#guestCountField'),wishField:$('#guestWishField'),wish:$('#guestWish'),footerNames:$('#footerNames'),languageSwitch:$('#languageSwitch')
+  rsvp:$('#rsvpSection'),form:$('#rsvpForm'),submit:$('#rsvpSubmit'),formStatus:$('#formStatus'),name:$('#guestName'),count:$('#guestCount'),countField:$('#guestCountField'),wishField:$('#guestWishField'),wish:$('#guestWish'),footerNames:$('#footerNames'),countdownDays:$('#countdownDays'),countdownHours:$('#countdownHours'),countdownMinutes:$('#countdownMinutes'),countdownSeconds:$('#countdownSeconds'),languageSwitch:$('#languageSwitch')
 };
 
 const defaultId = Number(document.querySelector('meta[name="invitation-default-id"]')?.content) || DEFAULT_INVITATION_ID;
 const state = { id:resolveInvitationId(location.pathname,defaultId), raw:null, invitation:null, language:'ru', submitting:false };
 let revealObserver;
 let backgroundFrame=0;
+let countdownTimer=0;
 
 function storedLanguage(){try{return localStorage.getItem('azure-palace-language')}catch{return null}}
 function saveLanguage(language){try{localStorage.setItem('azure-palace-language',language)}catch{}}
@@ -140,6 +141,28 @@ function renderRsvp(){
   elements.wishField.hidden=!config.allowGuestWish;
 }
 
+function updateCountdown(){
+  const target=new Date(state.invitation?.dateISO).getTime();
+  if(!Number.isFinite(target))return;
+  const remaining=Math.max(0,target-Date.now());
+  const days=Math.floor(remaining/86400000);
+  const hours=Math.floor(remaining/3600000)%24;
+  const minutes=Math.floor(remaining/60000)%60;
+  const seconds=Math.floor(remaining/1000)%60;
+  elements.countdownDays.textContent=String(days);
+  elements.countdownHours.textContent=String(hours).padStart(2,'0');
+  elements.countdownMinutes.textContent=String(minutes).padStart(2,'0');
+  elements.countdownSeconds.textContent=String(seconds).padStart(2,'0');
+  if(!remaining&&countdownTimer){clearInterval(countdownTimer);countdownTimer=0}
+}
+
+function startCountdown(){
+  if(countdownTimer)clearInterval(countdownTimer);
+  updateCountdown();
+  const target=new Date(state.invitation?.dateISO).getTime();
+  countdownTimer=Number.isFinite(target)&&target>Date.now()?setInterval(updateCountdown,1000):0;
+}
+
 function render(){
   const invitation=textFor(state.invitation.invitation);
   const wishes=textFor(state.invitation.wishBlock.content);
@@ -151,7 +174,7 @@ function render(){
   const showWish=state.invitation.wishBlock.enabled && (hasText(wishes.title)||hasText(wishes.text));
   elements.wishBlock.hidden=!showWish;elements.wishTitle.textContent=wishes.title;elements.wishText.textContent=wishes.text;
   elements.footerNames.textContent=[state.invitation.names.groom,state.invitation.names.bride].filter(Boolean).join(' & ');
-  renderUi();renderDate();renderTimeline();renderVenue();renderRsvp();renderLanguageSwitch();observeReveals();queueBackgroundParallax();
+  renderUi();renderDate();renderTimeline();renderVenue();renderRsvp();renderLanguageSwitch();startCountdown();observeReveals();queueBackgroundParallax();
 }
 
 function setLanguage(language){
