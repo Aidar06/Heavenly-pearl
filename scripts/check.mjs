@@ -94,7 +94,7 @@ for(const marker of ['@media (max-width:360px)','overflow-x:clip','max-width:100
 for(const marker of ['appendGuestToInvitation','IntersectionObserver','localStorage','renderTimeline','renderLanguageSwitch','queueBackgroundParallax','window.scrollY/travel','startCountdown','setInterval(updateCountdown,1000)'])assert(app.includes(marker),`Missing behavior ${marker}`);
 for(const removed of ['cloud-edge','cloud-ribbon','program__florals','venue__illustration','footer__clouds'])assert(!html.includes(removed),`Removed decoration still present: ${removed}`);
 assert(css.includes('background-position')&&css.includes('.footer{')&&css.includes('color:var(--ink);background:transparent'), 'Missing continuous sky background or light countdown footer');
-assert(css.includes('.calendar-card{')&&css.includes('aspect-ratio:4/5')&&css.includes('background:transparent')&&css.includes('.calendar-card__frame{'),'Missing transparent ornate calendar frame');
+assert(css.includes('.calendar-card{')&&css.includes('width:calc(100% + 24px)')&&css.includes('aspect-ratio:4/5')&&css.includes('background:transparent')&&css.includes('.calendar-card__frame{'),'Missing enlarged transparent ornate calendar frame');
 assert(!css.includes('background:rgba(246,251,254,.65)'),'The old white calendar block must be removed');
 assert(!css.includes("background:url('assets/hero-garden.webp')"),'Footer must keep the original sky style without a replacement photo');
 for(const section of ['.hero{','.invitation{','.wish{','.date-section{','.program{','.venue{','.rsvp{'])assert(css.includes(`${section}`)&&css.slice(css.indexOf(section),css.indexOf(section)+260).includes('background:transparent'),`Section is not seam-free: ${section}`);
