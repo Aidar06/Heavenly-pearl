@@ -15,7 +15,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const required = [
   'index.html','styles.css','app.js','backend-adapter.js','.openai/hosting.json',
-  'assets/hero-garden.webp','assets/floral-divider.webp','assets/floral-corners.webp','assets/calendar-hall.webp',
+  'assets/hero-garden.webp','assets/floral-divider.webp','assets/floral-corners.webp','assets/calendar-hall.webp','assets/sky-continuous.png',
   'assets/fonts/cormorant-regular.woff2','assets/fonts/cormorant-italic.woff2','assets/fonts/manrope-regular.woff2'
 ];
 for (const file of required) assert(fs.statSync(path.join(dist,file)).size>100,`Missing ${file}`);
