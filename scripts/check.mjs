@@ -93,7 +93,8 @@ for(const marker of ['statusScreen','languageSwitch','rsvpForm','googleMap','two
 for(const marker of ['@media (max-width:360px)','overflow-x:clip','max-width:100%','prefers-reduced-motion'])assert(css.includes(marker),`Missing CSS ${marker}`);
 for(const marker of ['appendGuestToInvitation','IntersectionObserver','localStorage','renderTimeline','renderLanguageSwitch','queueBackgroundParallax','window.scrollY/travel','startCountdown','setInterval(updateCountdown,1000)'])assert(app.includes(marker),`Missing behavior ${marker}`);
 for(const removed of ['cloud-edge','cloud-ribbon','program__florals','venue__illustration','footer__clouds'])assert(!html.includes(removed),`Removed decoration still present: ${removed}`);
-assert(css.includes('background-position')&&css.includes("background:url('assets/hero-garden.webp')")&&css.includes('mask-image:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.08) 5%,#000 24%'), 'Missing parallax background or blended countdown footer');
+assert(css.includes('background-position')&&css.includes('.footer{')&&css.includes('color:var(--ink);background:transparent'), 'Missing continuous sky background or light countdown footer');
+assert(!css.includes("background:url('assets/hero-garden.webp')"),'Footer must keep the original sky style without a replacement photo');
 for(const section of ['.hero{','.invitation{','.wish{','.date-section{','.program{','.venue{','.rsvp{'])assert(css.includes(`${section}`)&&css.slice(css.indexOf(section),css.indexOf(section)+260).includes('background:transparent'),`Section is not seam-free: ${section}`);
 assert(!`${html}${css}${app}`.toLowerCase().includes('swan'),'Swan artwork or copy must not be present');
 assert(!`${html}${css}${app}`.includes('лебед'),'Лебеди должны отсутствовать');
