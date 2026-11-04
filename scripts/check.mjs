@@ -15,7 +15,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const required = [
   'index.html','styles.css','app.js','backend-adapter.js','.openai/hosting.json',
-  'assets/hero-garden.webp','assets/floral-divider.webp','assets/floral-corners.webp','assets/calendar-hall.webp','assets/sky-continuous.png',
+  'assets/hero-garden.webp','assets/floral-divider.webp','assets/floral-corners.webp','assets/calendar-hall.webp','assets/sky-continuous.png','assets/calendar-ornate-frame.png',
   'assets/fonts/cormorant-regular.woff2','assets/fonts/cormorant-italic.woff2','assets/fonts/manrope-regular.woff2'
 ];
 for (const file of required) assert(fs.statSync(path.join(dist,file)).size>100,`Missing ${file}`);
@@ -89,11 +89,13 @@ assert.equal(submitted.raw.guests.length,2);
 const html=fs.readFileSync(path.join(dist,'index.html'),'utf8');
 const css=fs.readFileSync(path.join(dist,'styles.css'),'utf8');
 const app=fs.readFileSync(path.join(dist,'app.js'),'utf8');
-for(const marker of ['statusScreen','languageSwitch','rsvpForm','googleMap','twoGisMap','calendarDays','countdownDays','countdownSeconds','data-ui="countdownTitle"'])assert(html.includes(marker),`Missing ${marker}`);
+for(const marker of ['statusScreen','languageSwitch','rsvpForm','googleMap','twoGisMap','calendarDays','calendar-card__frame','loading="lazy"','countdownDays','countdownSeconds','data-ui="countdownTitle"'])assert(html.includes(marker),`Missing ${marker}`);
 for(const marker of ['@media (max-width:360px)','overflow-x:clip','max-width:100%','prefers-reduced-motion'])assert(css.includes(marker),`Missing CSS ${marker}`);
 for(const marker of ['appendGuestToInvitation','IntersectionObserver','localStorage','renderTimeline','renderLanguageSwitch','queueBackgroundParallax','window.scrollY/travel','startCountdown','setInterval(updateCountdown,1000)'])assert(app.includes(marker),`Missing behavior ${marker}`);
 for(const removed of ['cloud-edge','cloud-ribbon','program__florals','venue__illustration','footer__clouds'])assert(!html.includes(removed),`Removed decoration still present: ${removed}`);
 assert(css.includes('background-position')&&css.includes('.footer{')&&css.includes('color:var(--ink);background:transparent'), 'Missing continuous sky background or light countdown footer');
+assert(css.includes('.calendar-card{')&&css.includes('aspect-ratio:4/5')&&css.includes('background:transparent')&&css.includes('.calendar-card__frame{'),'Missing transparent ornate calendar frame');
+assert(!css.includes('background:rgba(246,251,254,.65)'),'The old white calendar block must be removed');
 assert(!css.includes("background:url('assets/hero-garden.webp')"),'Footer must keep the original sky style without a replacement photo');
 for(const section of ['.hero{','.invitation{','.wish{','.date-section{','.program{','.venue{','.rsvp{'])assert(css.includes(`${section}`)&&css.slice(css.indexOf(section),css.indexOf(section)+260).includes('background:transparent'),`Section is not seam-free: ${section}`);
 assert(!`${html}${css}${app}`.toLowerCase().includes('swan'),'Swan artwork or copy must not be present');
