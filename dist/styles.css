@@ -120,6 +120,7 @@ img{display:block;max-width:100%}
 .venue__copy .display-title{font-style:normal;font-size:clamp(3rem,13vw,5rem)}
 .venue__address{max-width:560px;margin:24px auto 0;color:var(--ink-soft);font-size:1rem;overflow-wrap:anywhere;text-wrap:pretty}
 .venue__actions{display:grid;gap:12px;margin-top:32px}
+.venue__actions.is-single{width:min(100%,360px);margin-inline:auto}
 .button{min-height:54px;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--accent);border-radius:999px;padding:14px 21px;text-decoration:none;font-size:.86rem;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
 .button:hover{transform:translateY(-2px)}
 .button svg{width:20px;height:20px;fill:currentColor}

@@ -66,6 +66,21 @@ for (const enabled of [['ru'],['ru','ky'],['ru','ky','kk']]) {
 const customLinks=buildMapLinks(normalized.venue,'ru','ky');
 assert.equal(customLinks.google,'https://maps.google.com/custom');
 assert.equal(customLinks.twoGis,'https://2gis.kg/search/%D0%B3.%20%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA%2C%20%D0%BE%D1%87%D0%B5%D0%BD%D1%8C%20%D0%B4%D0%BB%D0%B8%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%B0%D0%B4%D1%80%D0%B5%D1%81%2C%20%D0%B4%D0%BE%D0%BC%20123');
+
+const bothCustomLinks=buildMapLinks({...normalized.venue,map:{enabled:true,googleUrl:'https://maps.google.com/place',twoGisUrl:'https://2gis.kg/geo/1'}},'ru','ru');
+assert.equal(bothCustomLinks.google,'https://maps.google.com/place');
+assert.equal(bothCustomLinks.twoGis,'https://2gis.kg/geo/1');
+
+const fallbackLinks=buildMapLinks({...normalized.venue,map:{enabled:true,googleUrl:'',twoGisUrl:''}},'ru','ru');
+assert.equal(fallbackLinks.google,'https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA%2C%20%D0%BE%D1%87%D0%B5%D0%BD%D1%8C%20%D0%B4%D0%BB%D0%B8%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%B0%D0%B4%D1%80%D0%B5%D1%81%2C%20%D0%B4%D0%BE%D0%BC%20123');
+assert.equal(fallbackLinks.twoGis,'https://2gis.kg/search/%D0%B3.%20%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA%2C%20%D0%BE%D1%87%D0%B5%D0%BD%D1%8C%20%D0%B4%D0%BB%D0%B8%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%B0%D0%B4%D1%80%D0%B5%D1%81%2C%20%D0%B4%D0%BE%D0%BC%20123');
+
+const invalidLinks=buildMapLinks({...normalized.venue,map:{enabled:true,googleUrl:'javascript:alert(1)',twoGisUrl:'not-a-url'}},'ru','ru');
+assert.deepEqual(invalidLinks,fallbackLinks);
+
+const noAddressLinks=buildMapLinks({content:{ru:{name:'Изумруд',address:'  '}},map:{enabled:true,googleUrl:'',twoGisUrl:'https://2gis.kg/geo/2'}},'ru','ru');
+assert.deepEqual(noAddressLinks,{enabled:true,google:'',twoGis:'https://2gis.kg/geo/2'});
+
 const hiddenLinks=buildMapLinks({...normalized.venue,map:{...normalized.venue.map,enabled:false}},'ru','ru');
 assert.deepEqual(hiddenLinks,{enabled:false,google:'',twoGis:''});
 
@@ -91,6 +106,7 @@ const css=fs.readFileSync(path.join(dist,'styles.css'),'utf8');
 const app=fs.readFileSync(path.join(dist,'app.js'),'utf8');
 for(const marker of ['statusScreen','languageSwitch','rsvpForm','googleMap','twoGisMap','calendarDays','calendar-card__frame','loading="lazy"','countdownDays','countdownSeconds','data-ui="countdownTitle"'])assert(html.includes(marker),`Missing ${marker}`);
 for(const marker of ['@media (max-width:360px)','overflow-x:clip','max-width:100%','prefers-reduced-motion'])assert(css.includes(marker),`Missing CSS ${marker}`);
+for(const marker of ['.venue__actions{display:grid','.venue__actions.is-single','grid-template-columns:1fr 1fr'])assert(css.includes(marker),`Missing responsive map buttons CSS ${marker}`);
 for(const marker of ['appendGuestToInvitation','IntersectionObserver','localStorage','renderTimeline','renderLanguageSwitch','queueBackgroundParallax','window.scrollY/travel','startCountdown','setInterval(updateCountdown,1000)'])assert(app.includes(marker),`Missing behavior ${marker}`);
 for(const removed of ['cloud-edge','cloud-ribbon','program__florals','venue__illustration','footer__clouds'])assert(!html.includes(removed),`Removed decoration still present: ${removed}`);
 assert(css.includes('background-position')&&css.includes('.footer{')&&css.includes('color:var(--ink);background:transparent'), 'Missing continuous sky background or light countdown footer');

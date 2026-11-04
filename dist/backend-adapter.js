@@ -131,7 +131,7 @@ export function normalizeInvitation(raw = {}, fallbackId = DEFAULT_INVITATION_ID
 
 function safeHttpUrl(value) {
   try {
-    const url = new URL(String(value || ''));
+    const url = new URL(String(value || '').trim());
     return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
   } catch {
     return '';
@@ -144,11 +144,11 @@ export function buildMapLinks(venue, language, defaultLanguage) {
     || venue.content?.[defaultLanguage]
     || venue.content?.ru
     || {};
-  const query = details.address || details.name || '';
+  const address = String(details.address || '').trim();
   const google = safeHttpUrl(venue.map.googleUrl)
-    || (query ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}` : '');
+    || (address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}` : '');
   const twoGis = safeHttpUrl(venue.map.twoGisUrl)
-    || (query ? `https://2gis.kg/search/${encodeURIComponent(query)}` : '');
+    || (address ? `https://2gis.kg/search/${encodeURIComponent(address)}` : '');
   return { enabled: Boolean(google || twoGis), google, twoGis };
 }
 

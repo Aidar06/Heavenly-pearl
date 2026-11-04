@@ -6,7 +6,7 @@ import {
   fetchInvitationRaw,
   normalizeInvitation,
   resolveInvitationId
-} from './backend-adapter.js?v=1';
+} from './backend-adapter.js?v=2';
 
 const UI = {
   ru: {
@@ -129,6 +129,7 @@ function renderVenue(){
   elements.venueAddress.textContent=venue.address;
   const links=buildMapLinks(state.invitation.venue,state.language,state.invitation.languages.default);
   setMapLink(elements.google,links.google);setMapLink(elements.twoGis,links.twoGis);
+  elements.venueActions.classList.toggle('is-single',Boolean(links.google)!==Boolean(links.twoGis));
   elements.venueActions.hidden=!links.enabled;
 }
 
