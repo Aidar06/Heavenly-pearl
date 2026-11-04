@@ -28,7 +28,7 @@ const DATE = {
 
 const $ = (selector) => document.querySelector(selector);
 const elements = {
-  site:$('#site'),status:$('#statusScreen'),statusTitle:$('#statusTitle'),statusLoader:$('#statusLoader'),retry:$('#retryButton'),
+  background:$('.sky-noise'),site:$('#site'),status:$('#statusScreen'),statusTitle:$('#statusTitle'),statusLoader:$('#statusLoader'),retry:$('#retryButton'),
   groom:$('#groomName'),bride:$('#brideName'),heroDate:$('#heroDate'),invitationTitle:$('#invitationTitle'),invitationText:$('#invitationText'),signature:$('#invitationSignature'),
   wishBlock:$('#wishBlock'),wishTitle:$('#wishTitle'),wishText:$('#wishText'),dateSection:$('#dateSection'),dateDay:$('#dateDay'),dateMonth:$('#dateMonth'),dateMeta:$('#dateMeta'),calendarMonth:$('#calendarMonth'),calendarYear:$('#calendarYear'),calendarWeek:$('#calendarWeek'),calendarDays:$('#calendarDays'),
   program:$('#programSection'),timeline:$('#timeline'),venue:$('#venueSection'),venueType:$('#venueType'),venueName:$('#venueName'),venueAddress:$('#venueAddress'),venueActions:$('#venueActions'),google:$('#googleMap'),twoGis:$('#twoGisMap'),
@@ -38,6 +38,7 @@ const elements = {
 const defaultId = Number(document.querySelector('meta[name="invitation-default-id"]')?.content) || DEFAULT_INVITATION_ID;
 const state = { id:resolveInvitationId(location.pathname,defaultId), raw:null, invitation:null, language:'ru', submitting:false };
 let revealObserver;
+let backgroundFrame=0;
 
 function storedLanguage(){try{return localStorage.getItem('azure-palace-language')}catch{return null}}
 function saveLanguage(language){try{localStorage.setItem('azure-palace-language',language)}catch{}}
@@ -150,7 +151,7 @@ function render(){
   const showWish=state.invitation.wishBlock.enabled && (hasText(wishes.title)||hasText(wishes.text));
   elements.wishBlock.hidden=!showWish;elements.wishTitle.textContent=wishes.title;elements.wishText.textContent=wishes.text;
   elements.footerNames.textContent=[state.invitation.names.groom,state.invitation.names.bride].filter(Boolean).join(' & ');
-  renderUi();renderDate();renderTimeline();renderVenue();renderRsvp();renderLanguageSwitch();observeReveals();
+  renderUi();renderDate();renderTimeline();renderVenue();renderRsvp();renderLanguageSwitch();observeReveals();queueBackgroundParallax();
 }
 
 function setLanguage(language){
@@ -163,6 +164,18 @@ function observeReveals(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('.reveal,.timeline-item').forEach(node=>node.classList.add('is-visible'));return}
   revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}}),{threshold:.13,rootMargin:'0px 0px -4%'});
   document.querySelectorAll('.reveal,.timeline-item').forEach(node=>revealObserver.observe(node));
+}
+
+function updateBackgroundParallax(){
+  backgroundFrame=0;
+  const scroller=document.scrollingElement||document.documentElement;
+  const travel=Math.max(1,scroller.scrollHeight-window.innerHeight);
+  const progress=Math.max(0,Math.min(1,window.scrollY/travel));
+  elements.background.style.backgroundPosition=`center ${(progress*100).toFixed(3)}%`;
+}
+
+function queueBackgroundParallax(){
+  if(!backgroundFrame)backgroundFrame=requestAnimationFrame(updateBackgroundParallax);
 }
 
 async function load(){
@@ -208,4 +221,6 @@ elements.form.addEventListener('submit',async event=>{
 });
 
 elements.retry.addEventListener('click',load);
+addEventListener('scroll',queueBackgroundParallax,{passive:true});
+addEventListener('resize',queueBackgroundParallax,{passive:true});
 load();
