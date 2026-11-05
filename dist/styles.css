@@ -20,7 +20,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{max-width:100%;overflow-x:clip;scroll-behavior:smooth;background:var(--sky)}
 body{position:relative;isolation:isolate;margin:0;min-width:0;max-width:100%;overflow-x:clip;color:var(--ink);font-family:var(--sans);background:#c4dfee;font-size:16px;line-height:1.6}
-button,input,textarea{font:inherit}
+button,input,select,textarea{font:inherit}
 button,a{-webkit-tap-highlight-color:transparent}
 a{color:inherit}
 img{display:block;max-width:100%}
@@ -135,8 +135,9 @@ img{display:block;max-width:100%}
 .rsvp-form{display:grid;gap:24px;max-width:650px;margin:auto}
 .field{display:grid;gap:8px}
 .field>span,.attendance legend{color:#315e72;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
-.field input,.field textarea{width:100%;border:1px solid rgba(22,68,90,.26);border-radius:17px;padding:15px 16px;outline:none;color:var(--ink);background:rgba(255,255,255,.6);transition:border-color .2s,box-shadow .2s}
-.field input:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(13,98,125,.1)}
+.field input,.field select,.field textarea{width:100%;border:1px solid rgba(22,68,90,.26);border-radius:17px;padding:15px 16px;outline:none;color:var(--ink);background-color:rgba(255,255,255,.6);transition:border-color .2s,box-shadow .2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(13,98,125,.1)}
+.field select{appearance:none;padding-right:48px;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,#315e72 50%),linear-gradient(135deg,#315e72 50%,transparent 50%);background-position:calc(100% - 21px) 52%,calc(100% - 16px) 52%;background-size:5px 5px;background-repeat:no-repeat}
 .field textarea{resize:vertical;min-height:118px}
 .attendance{display:grid;gap:12px;margin:0;padding:0;border:0}
 .attendance legend{margin-bottom:6px}
@@ -165,9 +166,13 @@ img{display:block;max-width:100%}
 .footer__signature span{display:block;margin-right:8px;font:italic clamp(1.25rem,5vw,2rem)/1 var(--serif)}
 .footer__signature strong{display:block;margin-top:3px;font:italic 400 clamp(2.7rem,12vw,5.4rem)/.84 var(--serif);letter-spacing:-.045em;overflow-wrap:anywhere}
 
-.language-switch{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));z-index:100;display:flex;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.68);border-radius:999px;background:rgba(239,248,252,.76);box-shadow:0 12px 30px rgba(24,75,99,.18);backdrop-filter:blur(12px)}
-.language-switch button{min-width:38px;height:34px;border:0;border-radius:999px;background:transparent;color:var(--ink);font-size:.7rem;cursor:pointer}
-.language-switch button.is-active{color:#fff;background:var(--accent)}
+.language-switch{--language-open-width:136px;position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));z-index:1000;width:48px;height:48px;display:flex;align-items:center;justify-content:flex-end;gap:4px;padding:4px;overflow:hidden;border:1px solid rgba(199,164,103,.58);border-radius:999px;background:rgba(244,250,253,.76);box-shadow:0 10px 28px rgba(24,75,99,.18);backdrop-filter:blur(14px);transition:width .3s ease,background .25s ease,box-shadow .3s ease}
+.language-switch.is-open{width:var(--language-open-width);background:rgba(244,250,253,.9);box-shadow:0 14px 36px rgba(24,75,99,.23)}
+.language-switch button{flex:0 0 40px;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--ink);font-size:.68rem;font-weight:600;letter-spacing:.06em;opacity:0;transform:translateX(8px);pointer-events:none;cursor:pointer;transition:opacity .25s ease,transform .3s ease,color .2s ease,background .25s ease,box-shadow .25s ease}
+.language-switch button.is-active{order:99;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-deep));box-shadow:0 0 0 1px rgba(224,195,133,.78),0 0 17px rgba(224,195,133,.32);opacity:1;transform:none;pointer-events:auto}
+.language-switch.is-open button{opacity:.58;transform:none;pointer-events:auto}
+.language-switch.is-open button:hover,.language-switch.is-open button:focus-visible{opacity:1;color:var(--accent-deep);outline:none}
+.language-switch.is-open button.is-active{opacity:1;color:#fff}
 
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .85s ease,transform .85s ease}
 .reveal.is-visible{opacity:1;transform:none}

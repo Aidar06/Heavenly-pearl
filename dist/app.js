@@ -26,6 +26,8 @@ const DATE = {
   kk:{months:['қаңтар','ақпан','наурыз','сәуір','мамыр','маусым','шілде','тамыз','қыркүйек','қазан','қараша','желтоқсан'],monthsTitle:['Қаңтар','Ақпан','Наурыз','Сәуір','Мамыр','Маусым','Шілде','Тамыз','Қыркүйек','Қазан','Қараша','Желтоқсан'],week:['Дс','Сс','Ср','Бс','Жм','Сб','Жс'],days:['жексенбі','дүйсенбі','сейсенбі','сәрсенбі','бейсенбі','жұма','сенбі']}
 };
 
+const LANGUAGE_BADGES = {ru:'RU',ky:'KG',kk:'KZ'};
+
 const $ = (selector) => document.querySelector(selector);
 const elements = {
   background:$('.sky-noise'),site:$('#site'),status:$('#statusScreen'),statusTitle:$('#statusTitle'),statusLoader:$('#statusLoader'),retry:$('#retryButton'),
@@ -40,6 +42,7 @@ const state = { id:resolveInvitationId(location.pathname,defaultId), raw:null, i
 let revealObserver;
 let backgroundFrame=0;
 let countdownTimer=0;
+let languageSwitchOpen=false;
 
 function storedLanguage(){try{return localStorage.getItem('azure-palace-language')}catch{return null}}
 function saveLanguage(language){try{localStorage.setItem('azure-palace-language',language)}catch{}}
@@ -54,19 +57,48 @@ function dateParts(value){
   return {year:Number(year),month:Number(month),day:Number(day),hour,minute,weekday:new Date(Date.UTC(Number(year),Number(month)-1,Number(day))).getUTCDay()};
 }
 
+function syncLanguageSwitch(){
+  elements.languageSwitch.classList.toggle('is-open',languageSwitchOpen);
+  elements.languageSwitch.querySelectorAll('button').forEach(button=>{
+    const active=button.dataset.language===state.language;
+    if(active){
+      button.tabIndex=0;
+      button.removeAttribute('aria-hidden');
+      button.setAttribute('aria-expanded',String(languageSwitchOpen));
+      button.setAttribute('aria-label',languageSwitchOpen?'Закрыть выбор языка':'Открыть выбор языка');
+    }else{
+      button.tabIndex=languageSwitchOpen?0:-1;
+      button.setAttribute('aria-hidden',String(!languageSwitchOpen));
+    }
+  });
+}
+
+function closeLanguageSwitch(){
+  if(!languageSwitchOpen)return;
+  languageSwitchOpen=false;
+  syncLanguageSwitch();
+}
+
 function renderLanguageSwitch(){
   const languages=state.invitation.languages.enabled;
   elements.languageSwitch.replaceChildren();
-  if(languages.length<=1){elements.languageSwitch.hidden=true;return}
-  languages.forEach(language=>{
+  if(languages.length<=1){languageSwitchOpen=false;elements.languageSwitch.hidden=true;return}
+  elements.languageSwitch.style.setProperty('--language-open-width',`${languages.length*44+4}px`);
+  const ordered=[...languages.filter(language=>language!==state.language),state.language];
+  ordered.forEach(language=>{
     const button=document.createElement('button');
-    button.type='button';button.textContent=language.toUpperCase();button.dataset.language=language;
+    button.type='button';button.textContent=LANGUAGE_BADGES[language]||language.toUpperCase();button.dataset.language=language;
     button.classList.toggle('is-active',language===state.language);
     button.setAttribute('aria-pressed',String(language===state.language));
-    button.addEventListener('click',()=>setLanguage(language));
+    button.addEventListener('click',event=>{
+      event.stopPropagation();
+      if(language===state.language){languageSwitchOpen=!languageSwitchOpen;syncLanguageSwitch();return}
+      languageSwitchOpen=false;setLanguage(language);
+    });
     elements.languageSwitch.append(button);
   });
   elements.languageSwitch.hidden=false;
+  syncLanguageSwitch();
 }
 
 function renderUi(){
@@ -137,8 +169,12 @@ function renderRsvp(){
   const config=state.invitation.rsvp;
   elements.rsvp.hidden=!config.enabled;
   if(!config.enabled)return;
-  elements.count.max=String(config.maxGuests);
-  if(Number(elements.count.value)>config.maxGuests)elements.count.value=String(config.maxGuests);
+  const selected=Math.max(1,Math.min(config.maxGuests,Number(elements.count.value)||1));
+  const options=Array.from({length:config.maxGuests},(_,index)=>{
+    const option=document.createElement('option');option.value=String(index+1);option.textContent=String(index+1);return option;
+  });
+  elements.count.replaceChildren(...options);
+  elements.count.value=String(selected);
   elements.wishField.hidden=!config.allowGuestWish;
 }
 
@@ -245,6 +281,8 @@ elements.form.addEventListener('submit',async event=>{
 });
 
 elements.retry.addEventListener('click',load);
+document.addEventListener('pointerdown',event=>{if(languageSwitchOpen&&!elements.languageSwitch.contains(event.target))closeLanguageSwitch()});
+addEventListener('keydown',event=>{if(event.key==='Escape')closeLanguageSwitch()});
 addEventListener('scroll',queueBackgroundParallax,{passive:true});
 addEventListener('resize',queueBackgroundParallax,{passive:true});
 load();
