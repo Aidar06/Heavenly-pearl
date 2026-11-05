@@ -1,4 +1,4 @@
-# Azure Palace
+# Heavenly Pearl
 
 Отдельный mobile-first шаблон свадебного приглашения в небесно-голубой стилистике.
 

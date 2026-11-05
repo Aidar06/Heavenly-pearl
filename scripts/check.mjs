@@ -15,7 +15,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const required = [
   'index.html','styles.css','app.js','backend-adapter.js','.openai/hosting.json',
-  'assets/hero-garden.webp','assets/floral-divider.webp','assets/floral-corners.webp','assets/calendar-hall.webp','assets/sky-continuous.png','assets/calendar-ornate-frame.png',
+  'assets/sky-continuous.webp','assets/calendar-ornate-frame.webp',
   'assets/fonts/cormorant-regular.woff2','assets/fonts/cormorant-italic.woff2','assets/fonts/manrope-regular.woff2'
 ];
 for (const file of required) assert(fs.statSync(path.join(dist,file)).size>100,`Missing ${file}`);
@@ -105,6 +105,8 @@ const html=fs.readFileSync(path.join(dist,'index.html'),'utf8');
 const css=fs.readFileSync(path.join(dist,'styles.css'),'utf8');
 const app=fs.readFileSync(path.join(dist,'app.js'),'utf8');
 for(const marker of ['statusScreen','languageSwitch','rsvpForm','googleMap','twoGisMap','calendarDays','calendar-card__frame','loading="lazy"','countdownDays','countdownSeconds','data-ui="countdownTitle"','<select id="guestCount"'])assert(html.includes(marker),`Missing ${marker}`);
+for(const marker of ['assets/sky-continuous.webp','type="image/webp"','fetchpriority="high"','assets/calendar-ornate-frame.webp','width="720" height="900"','decoding="async"'])assert(html.includes(marker),`Missing image optimization ${marker}`);
+for(const legacy of ['sky-continuous.png','calendar-ornate-frame.png','hero-garden.webp','floral-divider.webp','floral-corners.webp','calendar-hall.webp'])assert(!`${html}${css}`.includes(legacy),`Unused or unoptimized image is still referenced: ${legacy}`);
 for(const marker of ['@media (max-width:360px)','overflow-x:clip','max-width:100%','prefers-reduced-motion'])assert(css.includes(marker),`Missing CSS ${marker}`);
 for(const marker of ['.venue__actions{display:grid','.venue__actions.is-single','grid-template-columns:1fr 1fr'])assert(css.includes(marker),`Missing responsive map buttons CSS ${marker}`);
 for(const marker of ['appendGuestToInvitation','IntersectionObserver','localStorage','renderTimeline','renderLanguageSwitch','syncLanguageSwitch','closeLanguageSwitch','LANGUAGE_BADGES','pointerdown','querySelectorAll(\'button\')','replaceChildren(...options)','queueBackgroundParallax','window.scrollY/travel','startCountdown','setInterval(updateCountdown,1000)'])assert(app.includes(marker),`Missing behavior ${marker}`);

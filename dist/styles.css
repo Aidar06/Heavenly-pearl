@@ -26,7 +26,7 @@ a{color:inherit}
 img{display:block;max-width:100%}
 [hidden]{display:none!important}
 
-.sky-noise{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:1;background:url('assets/sky-continuous.png') center 0%/cover no-repeat;will-change:background-position}
+.sky-noise{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:1;background:url('assets/sky-continuous.webp') center 0%/cover no-repeat;will-change:background-position}
 .sky-noise::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(236,248,253,.08),rgba(224,241,249,.2) 42%,rgba(202,228,241,.16))}
 
 .status-screen{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:24px;text-align:center;background:linear-gradient(180deg,#a9cee4,#e9f5fb)}
