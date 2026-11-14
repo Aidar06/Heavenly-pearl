@@ -21,7 +21,7 @@ const required = [
 for (const file of required) assert(fs.statSync(path.join(dist,file)).size>100,`Missing ${file}`);
 
 const fixture = {
-  id: 3,
+  public_id: 'pub-3',
   languages:{enabled:['ru','ky','kk'],default:'ky'},
   names:{groom:'Айдар',bride:'Алина'},
   date:'2027-08-18T16:00:00',
@@ -43,10 +43,10 @@ const fixture = {
   guests:[{name:'Нурия',wish:'Счастья!',guests_count:2,is_attending:true}]
 };
 
-assert.equal(resolveInvitationId('/3'),3);
-assert.equal(resolveInvitationId('/3/details'),3);
-assert.equal(resolveInvitationId('/wrong'),null);
-assert.equal(resolveInvitationId('/',7),7);
+assert.equal(resolveInvitationId('/pub-3'),'pub-3');
+assert.equal(resolveInvitationId('/550e8400-e29b-41d4-a716-446655440000/details'),'550e8400-e29b-41d4-a716-446655440000');
+assert.equal(resolveInvitationId('/wrong!'),null);
+assert.equal(resolveInvitationId('/',7),'7');
 
 const normalized = normalizeInvitation(fixture,3);
 assert.deepEqual(normalized.languages.enabled,['ru','ky','kk']);
@@ -95,9 +95,9 @@ const mockFetch=async (url,options={})=>{
   if((options.method||'GET')==='GET')return new Response(JSON.stringify(fixture),{status:200});
   return new Response(JSON.stringify({ok:true}),{status:200});
 };
-const submitted=await appendGuestToInvitation(3,{name:'Тест',guestsCount:2,isAttending:true},{fetchImpl:mockFetch});
-assert.equal(calls[0].url,`${API_BASE_URL}/3`);
-assert.equal(calls[1].url,`${API_BASE_URL}/3/full`);
+const submitted=await appendGuestToInvitation('pub-3',{name:'Тест',guestsCount:2,isAttending:true},{fetchImpl:mockFetch});
+assert.equal(calls[0].url,`${API_BASE_URL}/pub-3`);
+assert.equal(calls[1].url,`${API_BASE_URL}/pub-3/full`);
 assert.equal(calls[1].options.method,'PATCH');
 assert.equal(submitted.raw.guests.length,2);
 
